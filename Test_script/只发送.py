@@ -47,8 +47,9 @@ async def auth_system(ws: websockets.server.WebSocketServerProtocol):
 async def send_msg(ws: websockets.server.WebSocketServerProtocol):
     while True:
         recv_text = input(":")
-        await ws.send(json.dumps({"Session": Session, "data": recv_text}))
-        print(await ws.recv())
+        if len(recv_text):
+            await ws.send(json.dumps({"Session": Session, "data": recv_text}))
+            print(await ws.recv())
 
 # 客户端主逻辑
 async def main_logic():
