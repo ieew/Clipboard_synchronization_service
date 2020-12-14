@@ -1,0 +1,1 @@
+# Clipboard_synchronization_service
