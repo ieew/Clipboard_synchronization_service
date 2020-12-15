@@ -105,8 +105,8 @@ async def main_logic(conn: websockets.server.WebSocketServerProtocol, path):
 
 loop = asyncio.get_event_loop()
 try:
-    logger.info("开始运行~")
-    loop.run_until_complete(websockets.serve(main_logic, '127.0.0.1', 8088))
+    logger.info("开始运行(ws://0.0.0.0:8088)~")
+    loop.run_until_complete(websockets.serve(main_logic, '0.0.0.0', 8088))
     loop.run_until_complete(Heartbeats())
     loop.run_forever()
 except KeyboardInterrupt:
