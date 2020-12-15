@@ -7,7 +7,7 @@ import random
 from typing import List
 
 
-logger.basicConfig(level=logger.INFO,
+logger.basicConfig(level=logger.DEBUG,
                    format="[%(asctime)s %(levelname)s]: %(message)s",
                    datefmt="%Y-%m-%d %H:%M:%S")
 
@@ -78,7 +78,9 @@ async def recv_msg(ws: websockets.server.WebSocketServerProtocol):
                         for ws2 in Heartbeat:
                             if ws2.Session == recv_text["Session"]:
                                 await ws.send("{\"code\": 0, \"msg\": \"一切正常\"}")
+                                logger.debug("{\"code\": 0, \"msg\": \"一切正常\"}")
                             else:
+                                logger.debug(f"{{\"code\": 0, \"data\": \"{recv_text['data']}\"}}")
                                 await ws2.send(f"{{\"code\": 0, \"data\": \"{recv_text['data']}\"}}")
             else:
                 await ws.send("{\"code\": 2, \"msg\": \"Session 异常\"}")
